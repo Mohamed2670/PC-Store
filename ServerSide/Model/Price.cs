@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ServerSide.Model
 {
-    public class Price
+    public class Price : IEntity
     {
         public int Id { get; set; }
         [Required ,Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
