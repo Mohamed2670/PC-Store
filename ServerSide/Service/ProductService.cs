@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServerSide.Dto.PriceDtos;
 using ServerSide.Dto.ProductDtos;
 using ServerSide.Model;
@@ -63,20 +64,30 @@ namespace ServerSide.Service
             var productDeleted = await _repository.Delete(id);
             return _mapper.Map<ProductReadDto>(productDeleted);
         }
-        public async Task<ICollection<ProductReadDto>?> GetAllProducts(int page,int size)
+        public async Task<ICollection<ProductReadDto>?> GetAllProducts(int page, int size)
         {
             var products = await _repository.GetProductPagination(page, size);
             return _mapper.Map<ICollection<ProductReadDto>>(products);
         }
-        public async Task<ProductReadDto?>GetProductById(int id)
+        public async Task<ProductReadDto?> GetProductById(int id)
         {
             var product = await _repository.GetById(id);
             var productReadDto = _mapper.Map<ProductReadDto>(product);
             return productReadDto;
         }
-        public async Task<ICollection<ProductReadDto>?>GetProductsByCategoryId(int categoryId,int page,int size)
+        public async Task<ICollection<ProductReadDto>?> GetProductsByCategoryId(int categoryId, int page, int size)
         {
             var products = await _repository.GetProductsByCategoryId(categoryId, page, size);
+            return _mapper.Map<ICollection<ProductReadDto>>(products);
+        }
+        public async Task<ICollection<ProductReadDto>?> GetProductsByStoreId(int storeId, int page, int size)
+        {
+            var products = await _repository.GetProductsByStoreId(storeId, page, size);
+            return _mapper.Map<ICollection<ProductReadDto>>(products);
+        }
+        public async Task<ICollection<ProductReadDto>> GetProductsByProductName(string productName, int page, int size)
+        {
+            var products = await _repository.GetProductsByProductName(productName, page, size);
             return _mapper.Map<ICollection<ProductReadDto>>(products);
         }
     }

@@ -9,6 +9,8 @@ namespace ServerSide.Model
 
         [Required ,MaxLength(100)]
         public required string Name { get; set; }
+        public required Role Role { get; set; } = Role.User;
+        public int StoreId = 0;
 
         [Required,EmailAddress,MaxLength(100)]
         public required string Email { get; set; }

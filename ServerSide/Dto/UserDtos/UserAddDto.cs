@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using ServerSide.Model;
 
 namespace ServerSide.Dto.UserDtos
 {

@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ServerSide.Authentication;
 using ServerSide.Dto.UserDtos;
 using ServerSide.Service;
 
@@ -6,7 +8,10 @@ namespace ServerSide.Controllers
 {
     [ApiController]
     [Route("user")]
-    public class UserController(UserService _userService) : ControllerBase
+    [Authorize(Policy = "Admin")]
+
+
+    public class UserController(UserService _userService,UserAccessToken userAccessToken) : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()
@@ -46,12 +51,18 @@ namespace ServerSide.Controllers
             return userDeleted != null ? Ok(userDeleted) : NotFound();
         }
         [HttpPut("{email}")]
-        public async Task<IActionResult> UpdateUser(UserUpdateDto userUpdateDto,string email)
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateUser(UserUpdateDto userUpdateDto, string email)
         {
+            
             var user = await _userService.GetUserByEmail(email);
-            if(user ==null)
+            if (user == null)
             {
                 return BadRequest("User does not exist");
+            }
+            if (!userAccessToken.IsAuthenticatedUser(user.Id))
+            {
+                return Unauthorized();
             }
             var userUpdated = await _userService.UpdateUser(userUpdateDto, email);
             return Ok(userUpdated);
