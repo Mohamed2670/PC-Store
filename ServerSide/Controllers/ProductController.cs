@@ -15,6 +15,12 @@ namespace ServerSide.Controllers
             var products = await _productService.GetAllProducts(page, size);
             return products != null ? Ok(products) : NotFound();
         }
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetProductsByCategoryId(int categoryId, [FromQuery] int page = 1, [FromQuery] int size = 20)
+        {
+            var products = await _productService.GetProductsByCategoryId(categoryId, page, size);
+            return products != null ? Ok(products) : NotFound();
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(int id)

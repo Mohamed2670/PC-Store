@@ -5,6 +5,8 @@ namespace ServerSide.Model
     public class Product : IEntity
     {
         public int Id { get; set; }
+        public required int CategoryId { get; set; }
+        public Category? Category { get; set; }
         [Required]
 
         public required string Name { get; set; }

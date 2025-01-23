@@ -6,7 +6,7 @@ namespace ServerSide.Repository
 {
     public class PriceRepository : GeneRepository<Price>
     {
-            private readonly BuilderDBContext _context;
+        private readonly BuilderDBContext _context;
 
         public PriceRepository(BuilderDBContext context) : base(context)
         {

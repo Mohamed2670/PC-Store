@@ -74,6 +74,11 @@ namespace ServerSide.Service
             var productReadDto = _mapper.Map<ProductReadDto>(product);
             return productReadDto;
         }
+        public async Task<ICollection<ProductReadDto>?>GetProductsByCategoryId(int categoryId,int page,int size)
+        {
+            var products = await _repository.GetProductsByCategoryId(categoryId, page, size);
+            return _mapper.Map<ICollection<ProductReadDto>>(products);
+        }
     }
 
 }

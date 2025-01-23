@@ -15,10 +15,15 @@ namespace ServerSide.Repository
         {
             return await _context.Products.FirstOrDefaultAsync(x => x.Name == name && x.StoreId == storeId);
         }
-        public async Task<ICollection<Product>?>GetProductPagination(int page,int size = 20)
+        public async Task<ICollection<Product>?>GetProductPagination(int page,int size)
         {
             return await _context.Products.Skip((page - 1) * size).Take(size).ToListAsync();
         }
+        public async Task<ICollection<Product>?>GetProductsByCategoryId(int categoryId,int page,int size)
+        {
+            return await _context.Products.Where(x => x.CategoryId == categoryId).Skip((page - 1) * size).Take(size).ToListAsync();
+        }
+
 
     }
 }

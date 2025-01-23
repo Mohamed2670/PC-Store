@@ -12,8 +12,8 @@ using ServerSide.Data;
 namespace ServerSide.Migrations
 {
     [DbContext(typeof(BuilderDBContext))]
-    [Migration("20250123024245_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20250123050848_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,6 +72,23 @@ namespace ServerSide.Migrations
                     b.ToTable("Builds");
                 });
 
+            modelBuilder.Entity("ServerSide.Model.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("ServerSide.Model.Price", b =>
                 {
                     b.Property<int>("Id")
@@ -104,6 +121,9 @@ namespace ServerSide.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
                     b.Property<decimal>("CurrentPrice")
                         .HasColumnType("numeric");
 
@@ -123,6 +143,8 @@ namespace ServerSide.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("StoreId");
 
@@ -199,11 +221,19 @@ namespace ServerSide.Migrations
 
             modelBuilder.Entity("ServerSide.Model.Product", b =>
                 {
+                    b.HasOne("ServerSide.Model.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ServerSide.Model.Store", "Store")
                         .WithMany("Products")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Store");
                 });
