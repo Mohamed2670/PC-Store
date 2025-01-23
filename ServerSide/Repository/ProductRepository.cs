@@ -11,9 +11,13 @@ namespace ServerSide.Repository
         {
             _context = context;
         }
-        public async Task<Product?> GetByNameStoreId(string title,int storeId)
+        public async Task<Product?> GetByNameStoreId(string name,int storeId)
         {
-            return await _context.Products.FirstOrDefaultAsync(x => x.Name == title && x.StoreId == storeId);
+            return await _context.Products.FirstOrDefaultAsync(x => x.Name == name && x.StoreId == storeId);
+        }
+        public async Task<ICollection<Product>?>GetProductPagination(int page,int size = 20)
+        {
+            return await _context.Products.Skip((page - 1) * size).Take(size).ToListAsync();
         }
 
     }

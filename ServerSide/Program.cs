@@ -15,6 +15,7 @@ builder.Services.AddScoped<PriceRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<StoreRepository>();
 builder.Services.AddScoped<StoreService>();
+builder.Services.AddScoped<ProductService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
