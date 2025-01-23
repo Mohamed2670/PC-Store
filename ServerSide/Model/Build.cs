@@ -10,22 +10,14 @@ namespace ServerSide.Model
         [Required]
         public required int UserId { get; set; }
         public User? User { get; set; }
-        [MaxLength(100)]
-        public string? Cpu { get; set; }
-        [MaxLength(100)]
-        public string? Gpu { get; set; }
-        [MaxLength(100)]
-        public string? MotherBoard { get; set; }
-        [MaxLength(100)]
-        public string? Ram { get; set; }
-        [MaxLength(100)]
-        public string? Case { get; set; }
-        [MaxLength(100)]
-        public string? PowerSupply { get; set; }
-        [MaxLength(100)]
-        public string? Hdd { get; set; }
-        [MaxLength(100)]
-        public string? Sdd { get; set; }
+        public int? CpuId { get; set; }
+        public int? GpuId { get; set; }
+        public int? MotherBoardId { get; set; }
+        public int? RamId { get; set; }
+        public int? CaseId { get; set; }
+        public int? PowerSupplyId { get; set; }
+        public int? HddId { get; set; }
+        public int? SddId { get; set; }
 
     }
 

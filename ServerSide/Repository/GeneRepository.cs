@@ -13,27 +13,28 @@ namespace ServerSide.Repository
             return entity;
         }
 
-        public async Task<T> Delete(int id)
+        public async Task<T?> Delete(int id)
         {
             var entity = await GetById(id);
+            if(entity == null)
+            {
+                return null;
+            }
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>?> GetAll()
         {
             return await _context.Set<T>().ToListAsync();
             
         }
 
-        public async Task<T> GetById(int id)
+        public async Task<T?> GetById(int id)
         {
-            var entity = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
-            if (entity == null)
-            {
-                throw new KeyNotFoundException($"Entity with id {id} not found.");
-            }
+            T? entity = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
+            
             return entity;
         }
 

@@ -12,7 +12,7 @@ using ServerSide.Data;
 namespace ServerSide.Migrations
 {
     [DbContext(typeof(BuilderDBContext))]
-    [Migration("20250122045835_InitialCreate")]
+    [Migration("20250122220546_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -33,42 +33,34 @@ namespace ServerSide.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Case")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int?>("CaseId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Cpu")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int?>("CpuId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Gpu")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int?>("GpuId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Hdd")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int?>("HddId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("MotherBoard")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int?>("MotherBoardId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<string>("PowerSupply")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int?>("PowerSupplyId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Ram")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int?>("RamId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Sdd")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                    b.Property<int?>("SddId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("UserId")
                         .HasColumnType("integer");

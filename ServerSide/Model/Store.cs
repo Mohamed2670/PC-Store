@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ServerSide.Model
 {
-    public class Store
+    public class Store : IEntity
     {
         public int Id { get; set; }
         [Required , MaxLength(100)]

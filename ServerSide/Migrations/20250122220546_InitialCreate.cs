@@ -71,14 +71,14 @@ namespace ServerSide.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false),
-                    Cpu = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    Gpu = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    MotherBoard = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    Ram = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    Case = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    PowerSupply = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    Hdd = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    Sdd = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true)
+                    CpuId = table.Column<int>(type: "integer", nullable: true),
+                    GpuId = table.Column<int>(type: "integer", nullable: true),
+                    MotherBoardId = table.Column<int>(type: "integer", nullable: true),
+                    RamId = table.Column<int>(type: "integer", nullable: true),
+                    CaseId = table.Column<int>(type: "integer", nullable: true),
+                    PowerSupplyId = table.Column<int>(type: "integer", nullable: true),
+                    HddId = table.Column<int>(type: "integer", nullable: true),
+                    SddId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
