@@ -60,23 +60,31 @@ namespace ServerSide.Service
             var userReadDto = _mapper.Map<UserReadDto>(userDeleted);
             return userReadDto;
         }
-        public async Task<string?> Login(UserLoginDto userLoginDto)
+        public async Task<(string accessToken, string refreshToken,string userId)?> Login(UserLoginDto userLoginDto)
         {
             var user = await _repository.GetByEmail(userLoginDto.Email);
             if (user == null)
             {
                 return null;
             }
-            
+
             if (!BCrypt.Net.BCrypt.Verify(userLoginDto.Password, user.Password))
             {
                 return null;
             }
-
-            return TokenGenerate(user);
+            var accessToken = TokenGenerate(user, expiresInMinutes: 60); 
+            var refreshToken = TokenGenerate(user, expiresInDays: 7);
+            var userId = user.Id.ToString();
+            return (accessToken, refreshToken,userId);
         }
-        public string TokenGenerate(User user)
+        public string TokenGenerate(User user, int expiresInMinutes = 60, int expiresInDays = 0)
         {
+            var expirationDate = DateTime.UtcNow.AddMinutes(expiresInMinutes);
+
+            if (expiresInDays > 0)
+            {
+                expirationDate = DateTime.UtcNow.AddDays(expiresInDays);
+            }
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -90,7 +98,9 @@ namespace ServerSide.Service
                     new(ClaimTypes.Email,user.Email),
                     new(ClaimTypes.Role,user.Role.ToString()),
                     new("StoreId",user.StoreId.ToString())
-                })
+                }),
+                Expires = expirationDate
+
             };
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var accessToken = tokenHandler.WriteToken(securityToken);

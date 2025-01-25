@@ -20,10 +20,11 @@ namespace ServerSide.Authentication
             var storeId = user.FindFirst("StoreId")?.Value;
             if (role == "Admin")
                 return true;
-            if(storeId == entityId.ToString()){
+            if (storeId == entityId.ToString())
+            {
                 return true;
             }
-            
+
             return false;
         }
         public bool IsAuthenticatedUser(int userId)
@@ -39,11 +40,7 @@ namespace ServerSide.Authentication
             {
                 return true;
             }
-            if (personId != userId.ToString())
-            {
-                return false;
-            }
-            return true;
+            return personId == userId.ToString();
 
         }
     }

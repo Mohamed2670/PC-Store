@@ -21,8 +21,13 @@ namespace ServerSide.Controllers
 
         }
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetUserById(int id)
         {
+            if (!userAccessToken.IsAuthenticatedUser(id))
+            {
+                return Unauthorized();
+            }
             var user = await _userService.GetUserById(id);
             return user != null ? Ok(user) : NotFound();
         }
