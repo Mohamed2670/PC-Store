@@ -15,15 +15,15 @@ export default function Build({
   const navigate = useNavigate();
 
   const components = [
-    { id: 1, categoryId: "1", name: "motherboard" },
-    { id: 2, categoryId: "2", name: "graphic card" },
-    { id: 3, categoryId: "3", name: "ram" },
-    { id: 4, categoryId: "4", name: "processors" },
-    { id: 5, categoryId: "6", name: "computer case" },
-    { id: 6, categoryId: "7", name: "power supply" },
-    { id: 7, categoryId: "17", name: "ssd" },
-    { id: 8, categoryId: "18", name: "m.2" },
-    { id: 9, categoryId: "23", name: "monitors" },
+    { id: 1, categoryId: "1", name: "Motherboards" },
+    { id: 2, categoryId: "2", name: "Graphics Cards" },
+    { id: 3, categoryId: "5", name: "RAM" },
+    { id: 4, categoryId: "7", name: "Processors" },
+    { id: 5, categoryId: "9", name: "Computer Cases" },
+    { id: 6, categoryId: "10", name: "Power Supplies" },
+    { id: 7, categoryId: "13", name: "Internal Storage" },
+    { id: 8, categoryId: "32", name: "Monitors" },
+    { id: 9, categoryId: "33", name: "Storage" },
   ];
 
   // Function to handle part selection
