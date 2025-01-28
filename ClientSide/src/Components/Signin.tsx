@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { redirect } from "react-router-dom";
 interface SignInFormState {
   email: string;
   password: string;
@@ -27,6 +28,7 @@ export default function Signin() {
       localStorage.setItem("AccessToken", response.data.accessToken);
         localStorage.setItem("RefreshToken", response.data.refreshToken);
         localStorage.setItem("UserId", response.data.userId);
+        window.location.href = "/";
     } catch (error: any) {
       setStatus(error.response.data);
       console.log(error.response.data);
@@ -69,7 +71,7 @@ export default function Signin() {
           <p className="mt-4 text-sm text-center text-gray-600 dark:text-gray-400">
             Don't have an account?{" "}
             <a
-              href="/signup"
+              href="/sign-up"
               className="text-blue-600 hover:underline dark:text-blue-400"
             >
               Sign Up

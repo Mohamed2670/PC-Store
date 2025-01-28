@@ -1,0 +1,15 @@
+/* Home.css */
+.home-page-container {
+  height: 100vh;
+  background-image: url("https://radiumpcs.com.au/cdn/shop/collections/0071__0014_PC205163-Edit_jpg.jpg?v=1688541550&width=3500");
+  background-size: cover;
+
+  background-repeat: no-repeat;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

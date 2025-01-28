@@ -35,9 +35,9 @@ builder.Services.AddAuthentication()
                 ValidateAudience = true,
                 ValidAudience = jwtOptions.Audience,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SigningKey))
-
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SigningKey)),
             };
+            
         });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -61,9 +61,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+         policy.AllowAnyOrigin() 
+              .AllowAnyHeader() 
+              .AllowAnyMethod(); 
     });
 });
 var app = builder.Build();

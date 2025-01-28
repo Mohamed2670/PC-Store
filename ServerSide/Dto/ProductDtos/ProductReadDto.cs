@@ -8,7 +8,7 @@ namespace ServerSide.Dto.ProductDtos
 
         public required string Name { get; set; }
         [Required, Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
-
+        public required int CategoryId { get; set; }
         public required decimal CurrentPrice { get; set; }
         [Required]
         public required int StoreId { get; set; }

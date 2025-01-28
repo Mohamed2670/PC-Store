@@ -72,8 +72,20 @@ namespace ServerSide.Service
             {
                 return null;
             }
-            var accessToken = TokenGenerate(user, expiresInMinutes: 60); 
-            var refreshToken = TokenGenerate(user, expiresInDays: 7);
+            var accessToken = TokenGenerate(user, expiresInMinutes: 1); 
+            var refreshToken = TokenGenerate(user, expiresInDays: 2);
+            var userId = user.Id.ToString();
+            return (accessToken, refreshToken,userId);
+        }
+        public async Task<(string accessToken, string refreshToken,string userId)?> Refresh(string email)
+        {
+            var user = await _repository.GetByEmail(email);
+            if (user == null)
+            {
+                return null;
+            }
+            var accessToken = TokenGenerate(user, expiresInMinutes: 1); 
+            var refreshToken = TokenGenerate(user, expiresInDays: 2);
             var userId = user.Id.ToString();
             return (accessToken, refreshToken,userId);
         }

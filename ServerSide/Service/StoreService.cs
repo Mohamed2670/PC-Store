@@ -39,6 +39,13 @@ namespace ServerSide.Service
             return storeReadDto;
 
         }
+        public async Task<StoreReadDto?> GetStoreById(int id)
+        {
+            var store = await _repository.GetById(id);
+            var storeReadDto = _mapper.Map<StoreReadDto>(store);
+            return storeReadDto;
+
+        }
         public async Task<StoreReadDto?> DeleteStoreByName(string name)
         {
             var store = await _repository.GetByName(name);

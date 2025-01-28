@@ -77,6 +77,11 @@ namespace ServerSide.Controllers
             var product = await _productService.DeleteProductById(id);
             return product != null ? Ok(product) : NotFound();
         }
+        [HttpGet("price-history/{productId}")]
+        public async Task<IActionResult> GetProductPriceHistory(int productId){
+            var prices = await _productService.GetAllPriceHistoryProduct(productId);
+            return Ok(prices);
+        }
 
     }
 }

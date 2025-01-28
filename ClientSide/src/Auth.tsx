@@ -1,5 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router-dom";
 
 
 export default async function Auth() {
@@ -17,16 +16,17 @@ async function ValidateAccessToken() {
     return true;
   } catch (error) {
     var ret =  await ValidateRefreshToken();
-      console.error("Error:", error);
+      console.error(ret);
       return ret;
   }
 }
 async function ValidateRefreshToken() {
-  const API_URL = `http://localhost:5218/auth/access-token`;
+  const API_URL = `http://localhost:5218/auth/access-token/${localStorage.getItem("UserId")}`;
   const BEARER_TOKEN = localStorage.getItem("RefreshToken");
+  console.log(localStorage.getItem("RefreshToken"));
 
   try {
-    const response = await axios.post(API_URL, {
+    const response = await axios.post(API_URL,{}, {
       headers: {
         Authorization: `Bearer ${BEARER_TOKEN}`,
       },
@@ -38,6 +38,7 @@ async function ValidateRefreshToken() {
     localStorage.setItem("UserId", response.data.userId);
     return true;
   } catch (error) {
+    console.log("noooooooooooooooo")
       localStorage.clear();
       return false;
   }

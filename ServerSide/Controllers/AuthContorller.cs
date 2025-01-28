@@ -45,7 +45,7 @@ namespace ServerSide.Controllers
         {
             return Ok("Authorized");
         }
-        [HttpPost("access-token")]
+        [HttpPost("access-token/{userId}")]
         [Authorize]
         public async Task<IActionResult> GenerateToken(int userId)
         {
@@ -54,12 +54,7 @@ namespace ServerSide.Controllers
             {
                 return Forbid();
             }
-            var userLoginDto = new UserLoginDto
-            {
-                Email = user.Email,
-                Password = user.Password
-            };
-            var tokens = await _userService.Login(userLoginDto);
+            var tokens = await _userService.Refresh(user.Email);
             return tokens != null ? Ok(new
             {
                 accessToken = tokens.Value.accessToken,

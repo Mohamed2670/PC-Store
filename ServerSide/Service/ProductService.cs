@@ -90,6 +90,11 @@ namespace ServerSide.Service
             var products = await _repository.GetProductsByProductName(productName, page, size);
             return _mapper.Map<ICollection<ProductReadDto>>(products);
         }
+        public async Task<ICollection<PriceReadDto>> GetAllPriceHistoryProduct(int productId)
+        {
+            var prices = await _priceRepository.GetByProductId(productId);
+            return _mapper.Map<ICollection<PriceReadDto>>(prices);
+        }
     }
 
 }

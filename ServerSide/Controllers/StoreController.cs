@@ -18,7 +18,13 @@ namespace ServerSide.Controllers
             return stores != null ? Ok(stores) : NotFound();
 
         }
-        [HttpGet("{name}")]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetStoreById(int id)
+        {
+            var store = await _storeService.GetStoreById(id);
+            return store != null ? Ok(store) : NotFound();
+        }
+        [HttpGet("by-name/{name}")]
         public async Task<IActionResult> GetStoreByName(string name)
         {
             var store = await _storeService.GetStoreByName(name);

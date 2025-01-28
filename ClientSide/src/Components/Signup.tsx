@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { redirect, useNavigate } from "react-router-dom";
 interface SignUpFormState {
   name: string;
   email: string;
@@ -7,6 +8,9 @@ interface SignUpFormState {
 }
 const request = "http://localhost:5218/auth/register";
 export default function Signup() {
+  const navigate = useNavigate();
+
+
   const [formData, setFormData] = useState<SignUpFormState>({
     name: "",
     email: "",
@@ -21,11 +25,10 @@ export default function Signup() {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post(request, formData);
-        console.log(response);
-        
-    }
-    catch (error: any) {
+        const response = await axios.post(request, formData);
+        navigate("/sign-in");
+      console.log(response);
+    } catch (error: any) {
       console.log(error.response.data);
       console.log(formData.password.length);
       if (formData.name.length < 1) {
@@ -86,7 +89,7 @@ export default function Signup() {
           <p className="mt-4 text-sm text-center text-gray-600 dark:text-gray-400">
             Already have an account?{" "}
             <a
-              href="/"
+              href="/sign-in"
               className="text-blue-600 hover:underline dark:text-blue-400"
             >
               Sign In
