@@ -17,7 +17,6 @@ interface Build {
   totalPrice: number;
 }
 
-
 export default function BuildsDropdown() {
   const [builds, setBuilds] = useState<Build[]>([]);
   const [selectedBuild, setSelectedBuild] = useState<Build | null>(null);
@@ -110,23 +109,35 @@ export default function BuildsDropdown() {
             <h3 className="text-lg font-bold text-gray-700">
               {selectedBuild.name}
             </h3>
-         
+
             <p className="text-gray-600">Build ID: {selectedBuild.id}</p>
+            <div className="text-2xl">Total Price : {totalPrice} L.E</div>
+
             <h4 className="mt-4 text-md font-semibold text-gray-700">
               Products:
             </h4>
             <ul className="list-disc pl-5 text-gray-600">
               {products.length > 0 ? (
                 products.map((product) => (
-                  <li className="p-4" key={product.id}>
-                    <a href={product.productUrl}>{product.name}</a> - {product.currentPrice} L.E
+                  <li className="p-4 flex items-center" key={product.id}>
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className="w-12 h-12 object-cover mr-4"
+                    />
+                    <a
+                      href={`/products/details/${product.id}`}
+                      className="text-blue-600 hover:text-blue-800 hover:underline transition duration-300 ease-in-out"
+                    >
+                      {product.name}
+                    </a>
+                    <span className="ml-2">{product.currentPrice} L.E</span>
                   </li>
                 ))
               ) : (
                 <li>No products available</li>
               )}
             </ul>
-            <div>Total Price : {totalPrice} L.E</div>
           </div>
         )}
       </div>
